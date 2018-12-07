@@ -2,8 +2,38 @@
 
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.home.patients.controllers.PatientsController">
-    <Button text="Click me" onAction="#printHello"/>
-</AnchorPane>
+    <center>
+        <TableView fx:id="patientsTable" prefHeight="289.0" prefWidth="435.0"
+                   BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn prefWidth="75.0" text="ФИО">
+                    <cellValueFactory><PropertyValueFactory property="name" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="131.0" text="ДАТА РОЖДЕНИЯ">
+                    <cellValueFactory><PropertyValueFactory property="address" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="82.0" text="ПОЛ">
+                    <cellValueFactory><PropertyValueFactory property="sex" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="252.0" text="ГРУППЫ">
+                    <cellValueFactory><PropertyValueFactory property="groups"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </center>
+    <right>
+        <Button mnemonicParsing="false" text="Импортировать" BorderPane.alignment="CENTER"
+                onAction="#chooseFileDialog"/>
+    </right>
+</BorderPane>
