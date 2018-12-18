@@ -7,7 +7,6 @@ import com.home.patients.app.entities.Patient;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,9 +15,11 @@ import java.util.stream.Collectors;
 public class PatientService {
 
     private final Translator translator;
+    private final GroupService groupService;
 
-    public PatientService(Translator translator) {
+    public PatientService(Translator translator, GroupService groupService) {
         this.translator = translator;
+        this.groupService = groupService;
     }
 
     public List<LocalizedPatientDto> transformToDtos(List<Patient> patients) {
@@ -34,8 +35,8 @@ public class PatientService {
         dto.setBirthdate(patient.getBirthDate());
         Set<Group> groups = patient.getGroups();
         if (groups == null) {
-            groups = getGroupsForPatient(patient);
-            patient.setGroups(groups);
+            groupService.assignGroupToPatient(patient);
+            groups = patient.getGroups();
         }
         Set<String> translatedGroups = groups.stream().map(translator::getTranslatedGroup)
             .collect(Collectors.toSet());
@@ -43,9 +44,4 @@ public class PatientService {
         dto.setSex(translator.getTranslatedSex(patient.getSex()));
         return dto;
     }
-
-    private Set<Group> getGroupsForPatient(Patient patient) {
-        return Collections.emptySet();
-    }
-
 }

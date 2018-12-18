@@ -25,7 +25,7 @@ public class PatientsApp extends Application {
         ResourceBundle bundle = ResourceBundle.getBundle("bundles/sample", locale);
         Parent root = FXMLLoader.load(url, bundle);
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

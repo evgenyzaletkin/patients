@@ -40,7 +40,7 @@ public class Patient {
     private boolean drugUser;
     private boolean fsin;
     private boolean tuberculosis;
-    private boolean kkf;
+    private int kkf;
     @Transient
     private Set<Group> groups;
 }

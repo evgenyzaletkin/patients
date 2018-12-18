@@ -4,10 +4,8 @@ import static java.util.stream.StreamSupport.stream;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.home.patients.app.common.Translations;
 import com.home.patients.app.common.Translator;
 import com.home.patients.app.entities.Disease;
-import com.home.patients.app.entities.Group;
 import com.home.patients.app.entities.Patient;
 import com.home.patients.app.entities.Sex;
 import com.home.patients.app.entities.Status;
@@ -25,7 +23,6 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -92,8 +89,8 @@ public class XlsParser {
             patient.setDrugUser(rowWithMapping.getBoolValue(translator.getDrugsColumn()));
             patient.setSmoker(rowWithMapping.getBoolValue(translator.getSmokingColumn()));
             patient.setFsin(rowWithMapping.getBoolValue(translator.getFsinColumn()));
+            patient.setKkf(rowWithMapping.getIntValue(translator.getKkfColumn()));
             patient.setDiseases(parseDiseases(rowWithMapping));
-            patient.setGroups(EnumSet.allOf(Group.class));
             return patient;
         } catch (ParseException e) {
             throw new IllegalStateException(String.format("Can't parse row %s",
@@ -136,6 +133,10 @@ public class XlsParser {
             Integer index = mapping.get(columnName.toUpperCase());
             Cell textCell = row.getCell(index);
             return textCell.getStringCellValue();
+        }
+
+        private Integer getIntValue(String columnName) {
+            return Integer.valueOf(getStringValue(columnName));
         }
 
         private Date getDateValue(String columnName) throws ParseException {
