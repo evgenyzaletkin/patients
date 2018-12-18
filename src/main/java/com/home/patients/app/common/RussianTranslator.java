@@ -3,7 +3,7 @@ package com.home.patients.app.common;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RussianTitleMapper implements TitleMapper {
+public class RussianTranslator implements Translator {
 
     private static final String NAME_COLUMN = "ФИО";
     private static final String BIRTHDATE_COLUMN = "ДАТА РОЖДЕНИЯ";
@@ -136,5 +136,20 @@ public class RussianTitleMapper implements TitleMapper {
     @Override
     public String getYesValue() {
         return YES_VALUE;
+    }
+
+    @Override
+    public String getMedicalGroup() {
+        return "МЕДИЦИНСКИЕ";
+    }
+
+    @Override
+    public String getSocialGroup() {
+        return "СОЦИАЛЬНЫЕ";
+    }
+
+    @Override
+    public String getEpidemiologyGroup() {
+        return "ЭПИДЕМИОЛОГИЧЕСКИЕ";
     }
 }

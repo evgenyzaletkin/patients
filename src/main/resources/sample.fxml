@@ -18,7 +18,7 @@
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="131.0" text="ДАТА РОЖДЕНИЯ">
-                    <cellValueFactory><PropertyValueFactory property="address" />
+                    <cellValueFactory><PropertyValueFactory property="birthdate" />
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn prefWidth="82.0" text="ПОЛ">

@@ -1,6 +1,6 @@
 package com.home.patients.app.repositories;
 
-import com.home.patients.app.common.TitleMapper;
+import com.home.patients.app.common.Translator;
 import com.home.patients.app.entities.Disease;
 
 import org.springframework.transaction.support.TransactionTemplate;
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DiseasesRepositoryImpl implements DiseasesRepositoryExtended {
 
     private final EntityManager entityManager;
-    private final TitleMapper titleMapper;
+    private final Translator translator;
     private final TransactionTemplate transactionTemplate;
 
     private Disease hiv;
@@ -24,9 +24,9 @@ public class DiseasesRepositoryImpl implements DiseasesRepositoryExtended {
     private Disease tb;
 
     public DiseasesRepositoryImpl(EntityManager entityManager,
-                                  TitleMapper titleMapper, TransactionTemplate transactionTemplate) {
+                                  Translator translator, TransactionTemplate transactionTemplate) {
         this.entityManager = entityManager;
-        this.titleMapper = titleMapper;
+        this.translator = translator;
         this.transactionTemplate = transactionTemplate;
     }
 
@@ -59,27 +59,27 @@ public class DiseasesRepositoryImpl implements DiseasesRepositoryExtended {
     public void initDiseases() {
         transactionTemplate.execute(transactionStatus -> {
             Disease hiv = new Disease();
-            hiv.setName(titleMapper.getHivName());
+            hiv.setName(translator.getHivName());
             DiseasesRepositoryImpl.this.hiv = hiv;
             entityManager.persist(hiv);
 
             Disease sd = new Disease();
-            sd.setName(titleMapper.getSdName());
+            sd.setName(translator.getSdName());
             DiseasesRepositoryImpl.this.sd = sd;
             entityManager.persist(sd);
 
             Disease copd = new Disease();
-            copd.setName(titleMapper.getCobrName());
+            copd.setName(translator.getCobrName());
             DiseasesRepositoryImpl.this.cobr = copd;
             entityManager.persist(copd);
 
             Disease gi = new Disease();
-            gi.setName(titleMapper.getGiName());
+            gi.setName(translator.getGiName());
             DiseasesRepositoryImpl.this.gi = gi;
             entityManager.persist(gi);
 
             Disease tb = new Disease();
-            tb.setName(titleMapper.getTbColumn());
+            tb.setName(translator.getTbColumn());
             DiseasesRepositoryImpl.this.tb = tb;
             entityManager.persist(tb);
 
